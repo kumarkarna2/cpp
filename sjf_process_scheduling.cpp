@@ -9,7 +9,8 @@ int main()
          << "\n";
     cin >> num;
     int pro[num];
-
+    int wait[num];
+    wait[0] = 0;
     for (int i = 0; i < num; i++)
     {
         cout << "Enter burst time of process : " << i + 1
@@ -17,18 +18,24 @@ int main()
         cin >> pro[i];
     }
 
-    int arriv[num];
-    for (int i = 1; i <= num; i++)
+    // int arriv[num];
+    // for (int i = 1; i <= num; i++)
+    // {
+    //     cout << "Enter Arrival Time of process : " << i << "\n";
+    //     cin >> arriv[i];
+    // }
+
+    std::sort(pro, pro + num);
+
+    for (int i = 0; i < num; i++)
     {
-        cout << "Enter Arrival Time of process : " << i << "\n";
-        cin >> arriv[i];
+        cout << wait[i]
+             << "\n";
+        wait[i] = pro[i];
     }
-
-    std::sort(arriv, arriv + num);
-
-    for (int i = 0; i <= num; i++)
+    for (int i = 0; i < num; i++)
     {
-        cout << arriv[i] << " ";
+        cout << wait[i] << "\t";
     }
 
     return 0;

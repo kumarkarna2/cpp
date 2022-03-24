@@ -1,4 +1,8 @@
-for (int i = (size / 2) - 1; i > 0; i--)
+for (int i = 0; i < n; i++)
     // {
-    //     heapify(arr, size, i);
+    //     cout << "Enter waiting time for P"
+    //          << i + 1
+    //          << "\n ";
+    //     cin >>
+    //         wait[i];
     // }

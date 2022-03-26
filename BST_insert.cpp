@@ -16,7 +16,13 @@ node *nNode(int data)
     temp->rc = nullptr;
     return temp;
 }
-node *insert(node *root, int key)
+
+node *del(node *root, int key)
+{
+    
+}
+
+    node *insert(node *root, int key)
 {
 
     node *Node = nNode(key);

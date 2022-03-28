@@ -43,7 +43,7 @@ void sjf(int process[], int wait[], int n)
     wait[0] = 0;
     sort(process, process + n);
     
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
         wait[i] += process[i];
     }

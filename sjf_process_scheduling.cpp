@@ -8,35 +8,40 @@ int main()
     cout << "Enter # of processes"
          << "\n";
     cin >> num;
-    int pro[num];
+    int bt[num];
     int wait[num];
     wait[0] = 0;
     for (int i = 0; i < num; i++)
     {
         cout << "Enter burst time of process : " << i + 1
              << "\n";
-        cin >> pro[i];
+        cin >> bt[i];
     }
 
-    // int arriv[num];
-    // for (int i = 1; i <= num; i++)
-    // {
-    //     cout << "Enter Arrival Time of process : " << i << "\n";
-    //     cin >> arriv[i];
-    // }
+    sort(bt, bt + num);
 
-    std::sort(pro, pro + num);
+    wait[0] = 0;
+    for (int i = 1; i < num; i++)
+    {
+        wait[i] = wait[i - 1] + bt[i - 1];
+    }
+    
+    // avg waiting time
+    int total_wt = 0;
+    for (int i = 0; i < num; i++)
+    {
+        total_wt += wait[i];
+    }
+    cout << "avg waiting time is " << total_wt / num << endl;
+
+    // avg TAT //tat=wait[i]+bt[i]
+    int total_tat = 0;
 
     for (int i = 0; i < num; i++)
     {
-        cout << wait[i]
-             << "\n";
-        wait[i] = pro[i];
+        total_tat += wait[i] + bt[i];
     }
-    for (int i = 0; i < num; i++)
-    {
-        cout << wait[i] << "\t";
-    }
+    cout << "avg turn around time is " << total_tat / num << "\n";
 
     return 0;
 }

@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    int size;//# process
+    int size; //# process
     cout << "Enter number of processes"
          << "\n";
     cin >> size;
@@ -16,16 +16,13 @@ int main()
         cout << "Enter burst time of process " << i + 1 << endl;
         cin >> arr[i];
     }
-    int avgWT = 0, avgTAT = 0;
+    float avgWT = 0, avgTAT = 0;
 
     // calcilating waiting time for different processes
     // waiting time = burst time + waiting time of previous process
-    for (int i = 1; i < size; i++)
+    for (int i = 1; i <= size; i++)
     {
-        for (int j = 0; j < i; j++)
-        {
-            wait[i] += arr[j];
-        }
+        wait[i] = wait[i - 1] + arr[i - 1];
     }
 
     // calculating TAT

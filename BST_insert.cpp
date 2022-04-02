@@ -17,12 +17,7 @@ node *nNode(int data)
     return temp;
 }
 
-node *del(node *root, int key)
-{
-    
-}
-
-    node *insert(node *root, int key)
+node *insert(node *root, int key)
 {
 
     node *Node = nNode(key);

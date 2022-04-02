@@ -25,9 +25,9 @@ int main()
     {
         wait[i] = wait[i - 1] + bt[i - 1];
     }
-    
+
     // avg waiting time
-    int total_wt = 0;
+    int total_wt = 0, total_tat = 0;
     for (int i = 0; i < num; i++)
     {
         total_wt += wait[i];
@@ -35,11 +35,12 @@ int main()
     cout << "avg waiting time is " << total_wt / num << endl;
 
     // avg TAT //tat=wait[i]+bt[i]
-    int total_tat = 0;
+    int tat[num];
 
     for (int i = 0; i < num; i++)
     {
-        total_tat += wait[i] + bt[i];
+        tat[i] = wait[i] + bt[i];
+        total_tat += tat[i];
     }
     cout << "avg turn around time is " << total_tat / num << "\n";
 

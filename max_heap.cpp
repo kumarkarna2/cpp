@@ -7,13 +7,9 @@ void heapify(int arr[], int i, int size)
     int right = 2 * i + 2;
     int largest = i;
 
-    if (left < size && arr[left] > arr[i])
+    if (left < size && arr[left] > arr[largest])
     {
         largest = left;
-    }
-    else
-    {
-        largest = i;
     }
 
     if (right < size && arr[right] > arr[largest])
@@ -26,24 +22,19 @@ void heapify(int arr[], int i, int size)
         heapify(arr, largest, size);
     }
 }
-void swap(int i, int j)
-{
-    int temp = i;
-    i = j;
-    j = temp;
-}
 
 void Sort(int arr[], int size)
 {
-    // for (int i = (size / 2) - 1; i > 0; i--)
-    // {
-    //     heapify(arr, size, i);
-    // }
+    // last internal node i = (n/2)-1
+    for (int i = (size / 2) - 1; i >= 0; i--)
+    {
+        heapify(arr, i, size);
+    }
 
     for (int i = size - 1; i >= 0; i--)
     {
-        swap(arr[size], arr[0]);
-        heapify(arr, size, 0);
+        std::swap(arr[i], arr[0]);
+        heapify(arr, 0, i);
     }
 }
 
@@ -71,11 +62,6 @@ int main()
     print(arr, size);
     cout << "\nMax heap tree"
          << "\n";
-    // last internal node i = (n/2)-1
-    for (int i = (size / 2) - 1; i >= 0; i--)
-    {
-        heapify(arr, i, size);
-    }
 
     print(arr, size);
 

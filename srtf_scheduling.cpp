@@ -1,79 +1,55 @@
-#include <bits/stdc++.h>
+#include<iostream>
 
 using namespace std;
 int main()
 {
-    int n, temp, tt = 0, min, d, i, j;
-    float atat = 0, awt = 0, stat = 0, swt = 0;
+    int a[10],b[10],x[10];
+    int waiting[10],turnaround[10],completion[10];
+    int i,j,smallest,count=0,time,n;
+    double avg=0,tt=0,end;
 
-    cout << "enter no of process" << endl;
-    cin >> n;
-    int a[n], b[n], e[n], tat[n], wt[n];
+    cout<<"\nEnter the number of Processes: ";  //input
+    cin>>n;
+    for(i=0; i<n; i++)
+    {
+        cout<<"\nEnter arrival time of process: ";  //input
+        cin>>a[i];
+    }
+    for(i=0; i<n; i++)
+    {
+        cout<<"\nEnter burst time of process: ";  //input
+        cin>>b[i];
+    }
+    for(i=0; i<n; i++)
+        x[i]=b[i];
 
-    for (i = 0; i < n; i++)
+    b[9]=9999;
+    for(time=0; count!=n; time++)
     {
-        cout << "enter arival time of P" << i << " "; // input
-        cin >> a[i];
-    }
-    for (i = 0; i < n; i++)
-    {
-        cout << "enter brust time of P" << i << " "; // input
-        cin >>
-            b[i];
-    }
-    for (i = 0; i < n; i++)
-    {
-        for (j = i + 1; j < n; j++)
+        smallest=9;
+        for(i=0; i<n; i++)
         {
-            if (b[i] > b[j])
-            {
-                temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
+            if(a[i]<=time && b[i]<b[smallest] && b[i]>0 )
+                smallest=i;
+        }
+        b[smallest]--;
 
-                temp = b[i];
-                b[i] = b[j];
-                b[j] = temp;
-            }
+        if(b[smallest]==0)
+        {
+            count++;
+            end=time+1;
+            completion[smallest] = end;
+            waiting[smallest] = end - a[smallest] - x[smallest];
+            turnaround[smallest] = end - a[smallest];
         }
     }
-    min = a[0];
-    for (i = 0; i < n; i++)
+    cout<<"Process"<<"\t"<< "burst-time"<<"\t"<<"arrival-time" <<"\t"<<"waiting-time" <<"\t"<<"turnaround-time"<< "\t"<<"completion-time"<<endl;
+    for(i=0; i<n; i++)
     {
-        if (min > a[i])
-        {
-            min = a[i];
-            d = i;
-        }
+        cout<<"p"<<i+1<<"\t\t"<<x[i]<<"\t\t"<<a[i]<<"\t\t"<<waiting[i]<<"\t\t"<<turnaround[i]<<"\t\t"<<completion[i]<<endl;
+        avg = avg + waiting[i];
+        tt = tt + turnaround[i];
     }
-    tt = min;
-    e[d] = tt + b[d];
-    tt = e[d];
-
-    for (i = 0; i < n; i++)
-    {
-        if (a[i] != min)
-        {
-            e[i] = b[i] + tt;
-            tt = e[i];
-        }
-    }
-    for (i = 0; i < n; i++)
-    {
-
-        tat[i] = e[i] - a[i];
-        stat = stat + tat[i];
-        wt[i] = tat[i] - b[i];
-        swt = swt + wt[i];
-    }
-    atat = stat / n;
-    awt = swt / n;
-    cout << "Process  Arrival-time(s)  Burst-time(s)  Waiting-time(s)  Turnaround-time(s)\n";
-
-    for (i = 0; i < n; i++)
-    {
-        cout << "P" << i + 1 << "              " << a[i] << "                " << b[i] << "                  " << wt[i] << "               " << tat[i] << endl;
-    }
-
-    cout << "awt=" << awt << " atat=" << atat; // average waiting time and turn around time
+    cout<<"\n\nAverage waiting time ="<<avg/n;
+    cout<<"  Average Turnaround time ="<<tt/n<<endl;
 }

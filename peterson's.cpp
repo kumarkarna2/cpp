@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+void process2();
 // global declaration
-int i = 0, j = 1 - i;
+int i = 0,
+    j = 1 - i;
 int turn;
 bool flag[2] = {false, false};
 
@@ -35,7 +36,7 @@ void process2()
         turn = i;
         while (turn == i && flag[i])
             ;
-        cs(i);
+        cs(j);
         flag[i] = false;
         process1();
     }

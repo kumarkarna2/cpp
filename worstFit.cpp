@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-// #define max 50
 
 int main()
 {
@@ -48,6 +47,29 @@ int main()
     //      }
     //  }
 
+    // best fit
+    for (int i = 0; i < nFiles; i++)
+    {
+        int index = -1;
+        for (int j = 0; j < nBlock; j++)
+        {
+            if (block[j] >= file[i])
+            {
+                if (index == -1)
+                    index = j;
+                else if (block[index] > block[j])
+                    index = j;
+            }
+        }
+
+        if (index != -1)
+        {
+            allocate[i] = index;
+            block[index] -= file[i];
+            remSize[i] = block[index];
+        }
+    }
+
     // check whether a process is allocated
     for (int i = 0; i < nFiles; i++)
     {
@@ -66,5 +88,5 @@ int main()
         cout << "Remaining Block size " << remSize[i] << "\n";
     }
 
-    return 0;
+    // return 0;
 }

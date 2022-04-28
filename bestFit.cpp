@@ -1,89 +1,92 @@
-#include <iostream>
-#define lowest 999999;
+#include <bits/stdc++.h>
 using namespace std;
-int a;
-int b;
-
-void input(int block_size[], int proces_size[])
-{
-
-    cout << endl;
-    for (int i = 0; i < a; i++)
-    {
-        cout << "Enter size of block " << i << ": ";
-        cin >> block_size[i];
-    }
-    cout << endl;
-    for (int i = 0; i < b; i++)
-    {
-        cout << "Enter the size of process " << i << ": ";
-        cin >> proces_size[i];
-    }
-}
-
-void calculate(int *block_size, int *proces_size, int *block_num, int *fragment)
-{
-    int lowest;
-    int temp, i, j;
-
-    for (i = 0; i < b; i++)
-    {
-        for (j = 0; j < a; j++)
-        {
-
-            if (block_size[j] >= proces_size[i])
-            {
-                if ((block_size[j] - proces_size[i]) < lowest)
-                {
-                    lowest = block_size[j] - proces_size[i];
-                    temp = j;
-                }
-            }
-        }
-
-        lowest = 999999;
-        fragment[temp] = block_size[temp] - proces_size[i];
-        block_num[i] = temp;
-    }
-}
 
 int main()
 {
 
-    cout << "Enter total number of blocks: ";
+    int nFiles, nBlock;
 
-    cin >> a;
+    cout << "Enter # of blocks"
+         << "\n";
+    cin >> nBlock;
 
-    cout << "Enter total number of processes: ";
+    cout << "Enter # of Files"
+         << "\n";
+    cin >> nFiles;
 
-    cin >> b;
-
-    int block_size[a], proces_size[b], block_num[b], fragment[a];
-
-    cout << endl;
-    for (int i = 0; i < a; i++)
+    int file[nFiles], block[nBlock];
+    for (int i = 0; i < nBlock; i++)
     {
-        cout << "Enter size of block " << i << ": ";
-        cin >> block_size[i];
+        cout << "Enter Size Of the Block " << i + 1 << "\n";
+        cin >> block[i];
     }
-    cout << endl;
-    for (int i = 0; i < b; i++)
+    for (int i = 0; i < nFiles; i++)
     {
-        cout << "Enter the size of process " << i << ": ";
-        cin >> proces_size[i];
-    }
-
-    for (int i = 0; i < a; i++)
-    {
-        fragment[a] = block_size[a];
+        cout << "Enter Size Of the file " << i + 1 << "\n";
+        cin >> file[i];
     }
 
-    calculate(block_size, proces_size, block_num, fragment);
+    int remSize[nFiles];
 
-    cout << "\nProcess_no\tProcess_size\tBlock_no\tBlock_size\tFragment";
-    for (int i = 0; i < b; i++)
-        cout << "\n"
-             << i << "\t\t" << proces_size[i] << "\t\t" << block_num[i] << "\t\t" << block_size[block_num[i]] << "\t\t" << fragment[block_num[i]];
+    // calculation part
+    int allocate[nFiles];
+    memset(allocate, -1, nFiles); // fill value = -1, from 0 to size in array
+
+    // first fit
+    //  for (int i = 0; i < nFiles; i++)
+    //  {
+    //      for (int j = 0; j < nBlock; j++)
+    //      {
+    //          if (block[j] >= file[i])
+    //          {
+    //              allocate[i] = j;
+    //              block[j] -= file[i];
+    //              remSize[i] = block[j];
+    //              break;
+    //          }
+    //      }
+    //  }
+
+    // best fit
+    for (int i = 0; i < nFiles; i++)
+    {
+        int index = -1;
+        for (int j = 0; j < nBlock; j++)
+        {
+            if (block[j] >= file[i])
+            {
+                if (index == -1)
+                    index = j;
+                else if (block[index] > block[j])
+                    index = j;
+            }
+        }
+
+        if (index != -1)
+        {
+            allocate[i] = index;
+            block[index] -= file[i];
+            remSize[i] = block[index];
+        }
+    }
+
+    // check whether a process is allocated
+    for (int i = 0; i < nFiles; i++)
+    {
+        cout << "file no: " << i + 1 << "\n";
+        cout << "File size " << file[i]
+             << "\n";
+        if (allocate[i] != -1)
+        {
+            cout << "Block # = " << allocate[i] + 1 << "\n";
+        }
+        else
+        {
+            cout << "Not Allocated"
+                 << "\n";
+        }
+        cout << "Remaining Block size " << remSize[i] << "\n";
+    }
 
     return 0;
 }

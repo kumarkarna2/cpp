@@ -21,20 +21,21 @@ int choice()
         cout << "Invalid Choice"
              << "\n";
     }
+    return 0;
 }
 
-void print(int v, int matrix[][])
-{
-    for (int i = 0; i < v; i++)
-    {
-        for (int j = 0; j < v; j++)
-        {
-            cout << matrix[i][j];
-        }
-        cout << " ";
-    }
-    cout << "\n";
-}
+// void print(int v, int matrix[][])
+// {
+//     for (int i = 0; i < v; i++)
+//     {
+//         for (int j = 0; j < v; j++)
+//         {
+//             cout << matrix[i][j];
+//         }
+//         cout << " ";
+//     }
+//     cout << "\n";
+// }
 
 int main()
 {
@@ -51,18 +52,18 @@ int main()
             matrix[i][j] = choice();
         }
     }
-    // for (int i = 0; i < v; i++)
-    // {
+    for (int i = 0; i < v; i++)
+    {
 
-    //     for (int j = 0; j < v; j++)
-    //     {
-    //         cout << matrix[i][j];
-    //         cout << " ";
-    //     }
-    //     cout << "\n";
-    // }
+        for (int j = 0; j < v; j++)
+        {
+            cout << matrix[i][j];
+            cout << " ";
+        }
+        cout << "\n";
+    }
 
-    print(v, matrix[v][v]);
+    // print(v, matrix[v][v]);
 
     return 0;
 }

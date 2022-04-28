@@ -1,81 +1,60 @@
 #include <bits/stdc++.h>
 using namespace std;
+// void process2();
+// global declaration
+int i = 0,
+    j = 1 - i;
+int turn;
+bool flag[2] = {false, false};
 
-struct node
+void cs(int i)
 {
-    int data;
-    struct node *lc;
-    struct node *rc;
-};
-
-node *nNode(int data)
-{
-    node *temp = new node;
-    temp->data = data;
-    temp->lc = nullptr;
-    temp->rc = nullptr;
-    return temp;
+    cout << "P" << i + 1 << " in critical section"
+         << "\n";
 }
-node *insert(node *root, int key)
+void process1()
 {
-
-    node *Node = nNode(key);
-
-    node *temp = root;
-    node *pretemp;
-
-    while (temp != NULL)
+    while (1)
     {
-        pretemp = temp;
 
-        if (temp->data > key)
-        {
-            temp = temp->lc;
-        }
-        else
-        {
-            temp = temp->rc;
-        }
+        flag[i] = true;
+        turn = j;
+        while (turn == i && flag[i])
+            ;
+        cs(i);
+        flag[i] = false;
+        // process2();
     }
+    while (1)
+    {
 
-    if (pretemp == NULL)
-    {
-        pretemp = Node;
-    }
-    else if (pretemp->data > key)
-    {
-        pretemp->lc = Node;
-    }
-    else
-    {
-        pretemp->rc = Node;
-    }
-    return pretemp;
-}
-void inorder(node *root)
-{
-    if (root == NULL)
-        return;
-    else
-    {
-        inorder(root->lc);
-        cout << root->data << "\t";
-        inorder(root->rc);
+        flag[j] = true;
+        turn = i;
+        while (turn == i && flag[i])
+            ;
+        cs(j);
+        flag[i] = false;
+        // process1();
     }
 }
+
+// void process2()
+// {
+//     while (1)
+//     {
+
+//         flag[j] = true;
+//         turn = i;
+//         while (turn == i && flag[i])
+//             ;
+//         cs(j);
+//         flag[i] = false;
+//         process1();
+//     }
+// }
 
 int main()
 {
-    node *root = NULL;
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
-
-    inorder(root);
-
+    process1();
     return 0;
 }

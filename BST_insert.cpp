@@ -75,7 +75,6 @@ int main()
     insert(root, 70);
     insert(root, 60);
     insert(root, 80);
-
     inorder(root);
 
     return 0;

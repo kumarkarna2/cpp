@@ -23,14 +23,18 @@ void heapify(int arr[], int i, int size)
     }
 }
 
-void Sort(int arr[], int size)
+void maxHeap(int arr[], int size)
 {
     // last internal node i = (n/2)-1
     for (int i = (size / 2) - 1; i >= 0; i--)
     {
         heapify(arr, i, size);
     }
+}
+void Sort(int arr[], int size)
+{
 
+    maxHeap(arr, size);
     for (int i = size - 1; i >= 0; i--)
     {
         std::swap(arr[i], arr[0]);
@@ -53,16 +57,18 @@ int main()
          << "\n";
     cin >> size;
     int arr[size];
+    srand(time(NULL));
+
     for (int i = 0; i < size; i++)
     {
-        cin >> arr[i];
+        arr[i] = 1 + rand() % 99;
     }
     cout << "Original tree"
          << "\n";
     print(arr, size);
     cout << "\nMax heap tree"
          << "\n";
-
+    maxHeap(arr, size);
     print(arr, size);
 
     Sort(arr, size);

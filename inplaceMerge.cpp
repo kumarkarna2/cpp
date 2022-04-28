@@ -1,6 +1,6 @@
 #include <iostream>
 // #include <stdlib.h>
-// #include <ctime>
+#include <ctime>
 using namespace std;
 
 void merge(int arr[], int begin, int mid, int end)
@@ -64,21 +64,21 @@ int main()
     const int size = 10;
     int arr[size];
 
-    srand(20);
+    srand(time(NULL));
     for (int i = 0; i < size; i++)
     {
         arr[i] = 1 + rand() % 99;
     }
-    for (int i = 0; i < size; i++)
-    {
-        cout << arr[i] << " ";
-    }
-    cout << "\nAfter sorting"
-         << "\n";
-    int begin = 0;
-    int end = arr[size - 1];
+    // for (int i = 0; i < size; i++)
+    // {
+    //     cout << arr[i] << " ";
+    // }
+    cout << "\nBefore sorting\n";
+    print(arr, size);
 
-    mSort(arr, begin, end);
+    cout << "\nAfter sorting\n";
+
+    mSort(arr, 0, size - 1);
     print(arr, size);
 
     return 0;

@@ -48,36 +48,30 @@ int main()
     //      }
     //  }
 
-    // worst fit
-    int index = -1;
+    // best fit
+    int j = 0;
     for (int i = 0; i < nFiles; i++)
     {
-        for (int j = 0; i < nBlock; j++)
+        while (j < nBlock)
         {
+
             if (block[j] >= file[i])
             {
-                if (index == -1)
-                {
-                    index = j;
-                }
-                else if (block[index] > block[j])
-                {
-                    index = j;
-                }
+                allocate[i] = j;
+                block[j] -= file[i];
+                remSize[i]=block[j];
+
+                break;
             }
         }
-        if (index != -1)
-        {
-            allocate[i] = index;
-            block[index] = file[i];
-        }
+        j = (j + 1) % nBlock;//whether whole block is traversed
     }
 
     // check whether a process is allocated
     for (int i = 0; i < nFiles; i++)
     {
         cout << "file no: " << i + 1 << "\n";
-        cout << "file[i]"
+        cout << "File size " << file[i]
              << "\n";
         if (allocate[i] != -1)
         {

@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int v = 0;
 int choice()
 {
     cout << "1. Yes\n2. No"
@@ -22,24 +23,24 @@ int choice()
     }
 }
 
-// void print(int v, int *arr)
-// {
-//     for (int i = 0; i < v; i++)
-//     {
-//         for (int j = 0; j < v; j++)
-//         {
-//             cout << arr[i][j];
-//         }
-//         cout << " ";
-//     }
-//     cout << "\n";
-// }
+void print(int v, int matrix[][])
+{
+    for (int i = 0; i < v; i++)
+    {
+        for (int j = 0; j < v; j++)
+        {
+            cout << matrix[i][j];
+        }
+        cout << " ";
+    }
+    cout << "\n";
+}
 
 int main()
 {
-    int v;
     cout << "Enter number of Vertices"
          << "\n";
+    int v;
     cin >> v;
     int matrix[v][v];
     for (int i = 0; i < v; i++)
@@ -50,18 +51,18 @@ int main()
             matrix[i][j] = choice();
         }
     }
-    for (int i = 0; i < v; i++)
-    {
+    // for (int i = 0; i < v; i++)
+    // {
 
-        for (int j = 0; j < v; j++)
-        {
-            cout << matrix[i][j];
-            cout << " ";
-        }
-        cout << "\n";
-    }
+    //     for (int j = 0; j < v; j++)
+    //     {
+    //         cout << matrix[i][j];
+    //         cout << " ";
+    //     }
+    //     cout << "\n";
+    // }
 
-    // print(v, (int *)matrix);
+    print(v, matrix[v][v]);
 
     return 0;
 }

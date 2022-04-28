@@ -1,60 +1,23 @@
-#include <bits/stdc++.h>
-using namespace std;
-// void process2();
-// global declaration
-int i = 0,
-    j = 1 - i;
-int turn;
-bool flag[2] = {false, false};
-
-void cs(int i)
-{
-    cout << "P" << i + 1 << " in critical section"
-         << "\n";
-}
-void process1()
-{
-    while (1)
-    {
-
-        flag[i] = true;
-        turn = j;
-        while (turn == i && flag[i])
-            ;
-        cs(i);
-        flag[i] = false;
-        // process2();
-    }
-    while (1)
-    {
-
-        flag[j] = true;
-        turn = i;
-        while (turn == i && flag[i])
-            ;
-        cs(j);
-        flag[i] = false;
-        // process1();
-    }
-}
-
-// void process2()
-// {
-//     while (1)
-//     {
-
-//         flag[j] = true;
-//         turn = i;
-//         while (turn == i && flag[i])
-//             ;
-//         cs(j);
-//         flag[i] = false;
-//         process1();
-//     }
-// }
-
-int main()
-{
-    process1();
-    return 0;
-}
+ // int index = -1;
+    // for (int i = 0; i < nFiles; i++)
+    // {
+    //     for (int j = 0; i < nBlock; j++)
+    //     {
+    //         if (block[j] >= file[i])
+    //         {
+    //             if (index == -1)
+    //             {
+    //                 index = j;
+    //             }
+    //             else if (block[index] > block[j])
+    //             {
+    //                 index = j;
+    //             }
+    //         }
+    //     }
+    //     if (index != -1)
+    //     {
+    //         allocate[i] = index;
+    //         block[index] -= file[i];
+    //     }
+    // }
